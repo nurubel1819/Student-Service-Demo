@@ -3,7 +3,6 @@ package com.example.StudentServiceDemo.service.impl;
 import com.example.StudentServiceDemo.dto.ProductDto;
 import com.example.StudentServiceDemo.entity.ProductEntity;
 import com.example.StudentServiceDemo.mapper.ProductMapper;
-import com.example.StudentServiceDemo.mapper.UserMapper;
 import com.example.StudentServiceDemo.repo.ProductRepo;
 import com.example.StudentServiceDemo.service.ProductService;
 import org.springframework.stereotype.Service;
@@ -31,6 +30,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> see_all_product() {
         List<ProductEntity> all_product = productRepo.findAll();
+        return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDto> filter_search_using_name(String name) {
+        List<ProductEntity> all_product = productRepo.findByNameContaining(name);
+        return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDto> filter_search_using_price(double price) {
+        List<ProductEntity> all_product = productRepo.findByPriceLessThan(price);
         return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
     }
 

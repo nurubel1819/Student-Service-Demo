@@ -29,4 +29,16 @@ public class ProductController {
     {
         return ResponseEntity.ok(productService.see_all_product());
     }
+
+    @GetMapping("/filter_name/{name}")
+    private ResponseEntity<List<ProductDto>> filter_by_name(@PathVariable String name)
+    {
+        return ResponseEntity.ok(productService.filter_search_using_name(name));
+    }
+
+    @GetMapping("filter_price/{price}")
+    private ResponseEntity<List<ProductDto>> filter_by_price(@PathVariable double price)
+    {
+        return ResponseEntity.ok(productService.filter_search_using_price(price));
+    }
 }
