@@ -31,6 +31,12 @@ public class UserController {
         return ResponseEntity.ok(userService.login_user(loginUserDto));
     }
 
+    @PostMapping("/user_login")
+    private ResponseEntity<LoginUserDto> user_login_confirmation(@RequestBody LoginUserDto loginUserDto)
+    {
+        return ResponseEntity.ok(userService.user_login_confirmation(loginUserDto));
+    }
+
     @GetMapping("/see_all_user")
     private ResponseEntity<List<UserDto>> see_all_user()
     {

@@ -40,6 +40,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public LoginUserDto user_login_confirmation(LoginUserDto loginUserDto) {
+        String phone = loginUserDto.getPhone();
+        String password = loginUserDto.getPassword();
+        UserEntity user = userRepo.findByPhone(phone);
+        if(user==null)
+        {
+            loginUserDto.setPhone("not found");
+            loginUserDto.setPassword("invalid");
+            return loginUserDto;
+        }
+        else {
+            if(password.equals(user.getPassword()))
+            {
+                loginUserDto.setPassword("valid");
+                return loginUserDto;
+            }
+            else
+            {
+                loginUserDto.setPassword("invalid");
+                return loginUserDto;
+            }
+        }
+    }
+
+    @Override
     public List<UserDto> see_all_user() {
         List<UserEntity> all_user = userRepo.findAll();
         //convert entity to dto
