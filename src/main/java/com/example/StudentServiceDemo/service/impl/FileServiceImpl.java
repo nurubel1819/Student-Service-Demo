@@ -5,8 +5,7 @@ import com.example.StudentServiceDemo.service.FileService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -17,12 +16,12 @@ public class FileServiceImpl implements FileService {
     public FileResponseDto upload_image(String path, MultipartFile file) {
 
         //File name
-        String name = file.getOriginalFilename();
+        String originalName = file.getOriginalFilename();
         //Random name generate file
         String randomID = UUID.randomUUID().toString();
-        String fileName1 = randomID.concat(name.substring(name.lastIndexOf(".")));
+        String fileName = randomID.concat(originalName.substring(originalName.lastIndexOf(".")));
         //Full path
-        String filePath = path+ File.separator+fileName1;
+        String filePath = path+ File.separator+fileName;
         //Create folder if not created
         File f = new File(path);
         if(!f.exists())
@@ -36,6 +35,18 @@ public class FileServiceImpl implements FileService {
             throw new RuntimeException(e);
         }
 
-        return new FileResponseDto(name,"image is successfully upload");
+        return new FileResponseDto(fileName,"image is successfully upload");
+    }
+
+    @Override
+    public InputStream getResource(String path, String fileName) {
+        String fullPath = path+File.separator+fileName;
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(fullPath);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return inputStream;
     }
 }
