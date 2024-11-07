@@ -48,6 +48,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.filter_search_using_price(price));
     }
 
+    // upload product details with image
     @PostMapping("/upload_with_image")
     public ResponseEntity<FileResponseDto> fileUpload(
             @RequestParam("image") MultipartFile image,

@@ -74,18 +74,13 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException(e);
         }
 
-        //product and image path store in database
-        ProductEntity product = new ProductEntity();
-        product.setImage(fileName);
-        product.setName(productDto.getName());
-        product.setPrice(productDto.getPrice());
-        product.setLocation(productDto.getLocation());
-        product.setDescription(productDto.getDescription());
-
         //save data
-        productRepo.save(product);
+        productDto.setImage(fileName);
+        ProductEntity product = ProductMapper.MapToEntity(productDto);
+        ProductEntity save_product = productRepo.save(product);
+        if(save_product==null) return new FileResponseDto("invalid","not upload");
+        else return new FileResponseDto(fileName,"image is successfully upload");
 
-        return new FileResponseDto(fileName,"image is successfully upload");
     }
 
 }

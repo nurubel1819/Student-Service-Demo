@@ -6,7 +6,7 @@ import com.example.StudentServiceDemo.entity.ProductEntity;
 public class ProductMapper {
     public static ProductEntity MapToEntity(ProductDto productDto)
     {
-        return new ProductEntity(productDto.getId(),productDto.getImage(), productDto.getCategory(),productDto.getName(),productDto.getPrice(),
+        return new ProductEntity(productDto.getId(),productDto.getImage(),productDto.getCategory(),productDto.getName(),productDto.getPrice(),
                 productDto.getLocation(),productDto.getDescription());
     }
 
