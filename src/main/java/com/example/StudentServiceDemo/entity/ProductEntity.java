@@ -14,6 +14,8 @@ public class ProductEntity {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
+    private String image;
+    @Column(nullable = false)
     private String category;
     @Column(nullable = false)
     private String name;

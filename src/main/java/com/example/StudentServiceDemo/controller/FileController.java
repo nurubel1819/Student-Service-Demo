@@ -26,9 +26,17 @@ public class FileController {
 
     @PostMapping("/upload")
     public ResponseEntity<FileResponseDto> fileUpload(
-            @RequestParam("image") MultipartFile image
+            @RequestParam("image") MultipartFile image,
+
+            @RequestParam("category") String category,
+            @RequestParam("name") String name,
+            @RequestParam("price") String price,
+            @RequestParam("location") String location,
+            @RequestParam("description") String description
+
     )
     {
+        //here create ProductDto object and init it
         //String fileName = this.fileService.upload_image(path,image);
         return new ResponseEntity<>(fileService.upload_image(path,image), HttpStatus.OK);
     }
