@@ -42,7 +42,7 @@ public class FileController {
     }
 
     // Method to serve file
-    /*@GetMapping(value = "/images/{imageName}",produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/images/{imageName}",produces = MediaType.IMAGE_JPEG_VALUE)
     public void downloadImage(
             @PathVariable("imageName") String imageName,
             HttpServletResponse response
@@ -50,8 +50,10 @@ public class FileController {
         InputStream resource = this.fileService.getResource(path,imageName);
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         StreamUtils.copy(resource,response.getOutputStream());
-    }*/
-    @PostMapping(value = "/images",produces = MediaType.IMAGE_JPEG_VALUE)
+    }
+
+
+    /*@PostMapping(value = "/images",produces = MediaType.IMAGE_JPEG_VALUE)
     public void downloadImage(
             //@PathVariable("imageName") String imageName,
             @RequestBody FileResponseDto fileResponseDto,
@@ -61,6 +63,6 @@ public class FileController {
         InputStream resource = this.fileService.getResource(path,imageName);
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         StreamUtils.copy(resource,response.getOutputStream());
-    }
+    }*/
 
 }

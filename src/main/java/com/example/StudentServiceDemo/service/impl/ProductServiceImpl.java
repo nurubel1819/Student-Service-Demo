@@ -79,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity product = ProductMapper.MapToEntity(productDto);
         ProductEntity save_product = productRepo.save(product);
         if(save_product==null) return new FileResponseDto("invalid","not upload");
-        else return new FileResponseDto(fileName,"image is successfully upload");
+        else return new FileResponseDto(fileName,"Product is successfully upload");
 
     }
 
