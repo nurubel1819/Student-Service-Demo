@@ -53,6 +53,7 @@ public class ProductController {
     public ResponseEntity<FileResponseDto> fileUpload(
             @RequestParam("image") MultipartFile image,
 
+            @RequestParam("phone") String phone,
             @RequestParam("category") String category,
             @RequestParam("name") String name,
             @RequestParam("price") String price,
@@ -63,6 +64,7 @@ public class ProductController {
     {
         //here create ProductDto object and init it
         ProductDto product = new ProductDto();
+        product.setPhone(phone);
         product.setCategory(category);
         product.setName(name);
         product.setPrice(Double.parseDouble(price));

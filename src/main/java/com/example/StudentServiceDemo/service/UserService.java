@@ -11,4 +11,5 @@ public interface UserService {
     public LoginUserDto user_login_confirmation(LoginUserDto loginUserDto);
     public List<UserDto> see_all_user();
     public String delete_user(Long id);
+    public UserDto get_user_by_phone(UserDto userDto);
 }

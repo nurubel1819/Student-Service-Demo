@@ -6,13 +6,13 @@ import com.example.StudentServiceDemo.entity.ProductEntity;
 public class ProductMapper {
     public static ProductEntity MapToEntity(ProductDto productDto)
     {
-        return new ProductEntity(productDto.getId(),productDto.getImage(),productDto.getCategory(),productDto.getName(),productDto.getPrice(),
+        return new ProductEntity(productDto.getId(),productDto.getPhone(),productDto.getImage(),productDto.getCategory(),productDto.getName(),productDto.getPrice(),
                 productDto.getLocation(),productDto.getDescription());
     }
 
     public static ProductDto MapToDto(ProductEntity productEntity)
     {
-        return new ProductDto(productEntity.getId(),productEntity.getImage(),productEntity.getCategory(),productEntity.getName(),
+        return new ProductDto(productEntity.getId(),productEntity.getPhone(),productEntity.getImage(),productEntity.getCategory(),productEntity.getName(),
                 productEntity.getPrice(),productEntity.getLocation(),productEntity.getDescription());
     }
 }

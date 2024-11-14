@@ -48,4 +48,10 @@ public class UserController {
     {
         return ResponseEntity.ok(userService.delete_user(id));
     }
+
+    @PostMapping("/see_single_user")
+    private ResponseEntity<UserDto> see_single_user(@RequestBody UserDto userDto)
+    {
+        return ResponseEntity.ok(userService.get_user_by_phone(userDto));
+    }
 }

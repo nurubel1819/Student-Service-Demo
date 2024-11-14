@@ -76,4 +76,11 @@ public class UserServiceImpl implements UserService {
         userRepo.deleteById(id);
         return "Delete successfully";
     }
+
+    @Override
+    public UserDto get_user_by_phone(UserDto userDto) {
+        String phone_number = userDto.getPhone();
+        UserEntity user = userRepo.findByPhone(phone_number);
+        return UserMapper.MapToDto(user);
+    }
 }
