@@ -4,11 +4,13 @@ import com.example.StudentServiceDemo.dto.LocationDto;
 import com.example.StudentServiceDemo.dto.SingleResponseDto;
 import com.example.StudentServiceDemo.entity.LocationEntity;
 import com.example.StudentServiceDemo.mapper.LocationMapper;
+import com.example.StudentServiceDemo.mapper.ProductMapper;
 import com.example.StudentServiceDemo.repo.LocationRepo;
 import com.example.StudentServiceDemo.service.LocationService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LocationServiceImpl implements LocationService {
@@ -29,6 +31,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<LocationDto> get_all_location() {
-        return List.of();
+        List<LocationEntity> all_location = locationRepo.findAll();
+        return all_location.stream().map(LocationMapper::MapToDto).collect(Collectors.toList());
     }
 }
