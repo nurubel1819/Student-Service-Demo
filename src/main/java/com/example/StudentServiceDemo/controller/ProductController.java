@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     // upload product details with image
-    @PostMapping("/upload_with_image")
+    @PostMapping("/upload_details_with_image")
     public ResponseEntity<FileResponseDto> fileUpload(
             @RequestParam("image") MultipartFile image,
 
