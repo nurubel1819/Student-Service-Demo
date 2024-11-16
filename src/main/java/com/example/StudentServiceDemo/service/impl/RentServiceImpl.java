@@ -15,7 +15,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class RentServiceImpl implements RentService {
@@ -54,5 +56,11 @@ public class RentServiceImpl implements RentService {
         RentEntity save_rent = rentRepo.save(rentEntity);
         if(save_rent==null) return new FileResponseDto("invalid","not upload");
         else return new FileResponseDto(fileName,"Successfully upload");
+    }
+
+    @Override
+    public List<RentDto> get_all_rent_details() {
+        List<RentEntity> all_rent = rentRepo.findAll();
+        return all_rent.stream().map(RentMapper::MapToDto).collect(Collectors.toList());
     }
 }

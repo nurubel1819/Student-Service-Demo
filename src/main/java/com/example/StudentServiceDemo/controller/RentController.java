@@ -6,11 +6,10 @@ import com.example.StudentServiceDemo.service.RentService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/rent")
@@ -48,5 +47,11 @@ public class RentController {
         rentDto.setDescription(description);
 
         return new ResponseEntity<>(rentService.upload_rent_details(path,image,rentDto), HttpStatus.CREATED);
+    }
+    // find all rent details
+    @GetMapping("/get_all")
+    private ResponseEntity<List<RentDto>> get_all_rent_details()
+    {
+        return ResponseEntity.ok(rentService.get_all_rent_details());
     }
 }
