@@ -63,4 +63,11 @@ public class RentServiceImpl implements RentService {
         List<RentEntity> all_rent = rentRepo.findAll();
         return all_rent.stream().map(RentMapper::MapToDto).collect(Collectors.toList());
     }
+
+    @Override
+    public RentDto get_single_rent_details(Long id) {
+        RentEntity single_rent_details = rentRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("rent post id not found !"));
+        return RentMapper.MapToDto(single_rent_details);
+    }
 }

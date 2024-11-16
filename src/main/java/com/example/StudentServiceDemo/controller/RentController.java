@@ -2,6 +2,7 @@ package com.example.StudentServiceDemo.controller;
 
 import com.example.StudentServiceDemo.dto.FileResponseDto;
 import com.example.StudentServiceDemo.dto.RentDto;
+import com.example.StudentServiceDemo.dto.SingleUploadLongDto;
 import com.example.StudentServiceDemo.service.RentService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -53,5 +54,12 @@ public class RentController {
     private ResponseEntity<List<RentDto>> get_all_rent_details()
     {
         return ResponseEntity.ok(rentService.get_all_rent_details());
+    }
+
+    @PostMapping("/find_by_id")
+    private ResponseEntity<RentDto> find_by_post_id(@RequestBody SingleUploadLongDto singleUploadLongDto)
+    {
+        Long id = singleUploadLongDto.getId();
+        return ResponseEntity.ok(rentService.get_single_rent_details(id));
     }
 }
