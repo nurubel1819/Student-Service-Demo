@@ -10,4 +10,10 @@ public interface RentRepo extends JpaRepository<RentEntity,Long> {
     List<RentEntity> findByMember(int member);
     List<RentEntity> findByFloor(int floor);
     List<RentEntity> findByPriceLessThan(double price);
+    List<RentEntity> findByLocationAndPriceLessThanAndFloorLessThanAndMemberLessThan(String location,double price,int floor,int member);
+    List<RentEntity> findByFloorLessThanAndMemberLessThan(int floor,int member);
+    List<RentEntity> findByLocationAndFloorLessThanAndMemberLessThan(String location,int floor,int member);
+    List<RentEntity> findByPriceLessThanAndFloorLessThanAndMemberLessThan(double price,int floor,int member);
+
+
 }

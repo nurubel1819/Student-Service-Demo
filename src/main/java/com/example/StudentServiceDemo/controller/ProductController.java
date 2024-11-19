@@ -84,9 +84,9 @@ public class ProductController {
         return ResponseEntity.ok(productService.get_single_product_details(id));
     }
 
-    @PostMapping("/find_by_category_and_location")
-    private ResponseEntity<List<ProductDto>> find_by_category_and_location(@RequestBody ProductDto productDto)
+    @PostMapping("/find_by_category_and_price")
+    private ResponseEntity<List<ProductDto>> find_by_category_and_price(@RequestBody ProductDto productDto)
     {
-        return ResponseEntity.ok(productService.find_by_category_and_location(productDto));
+        return ResponseEntity.ok(productService.find_by_category_and_price(productDto));
     }
 }

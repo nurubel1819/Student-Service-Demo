@@ -13,5 +13,5 @@ public interface ProductService {
     public List<ProductDto> filter_search_using_price(double price);
     public FileResponseDto upload_product(String path, MultipartFile file,ProductDto productDto);
     public ProductDto get_single_product_details(Long id);
-    public List<ProductDto> find_by_category_and_location(ProductDto productDto);
+    public List<ProductDto> find_by_category_and_price(ProductDto productDto);
 }

@@ -94,17 +94,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> find_by_category_and_location(ProductDto productDto) {
+    public List<ProductDto> find_by_category_and_price(ProductDto productDto) {
 
         String category = productDto.getCategory();
-        String location = productDto.getLocation();
+        double price = productDto.getPrice();
+        //String location = productDto.getLocation();
 
-        if(!category.equals("All") && !location.equals("All"))
+        if(!category.equals("All") && price!=-1)
         {
-            List<ProductEntity> all_product = productRepo.findByCategoryAndLocation(category,location);
+            List<ProductEntity> all_product = productRepo.findByCategoryAndPriceLessThan(category,price);
             return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
         }
-        else if(category.equals("All") && location.equals("All"))
+        else if(category.equals("All") && price==-1)
         {
             List<ProductEntity> all_product = productRepo.findAll();
             return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
@@ -116,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
         }
         else
         {
-            List<ProductEntity> all_product = productRepo.findByLocation(location);
+            List<ProductEntity> all_product = productRepo.findByPriceLessThan(price);
             return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
         }
     }

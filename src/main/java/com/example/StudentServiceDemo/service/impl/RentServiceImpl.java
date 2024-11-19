@@ -70,4 +70,33 @@ public class RentServiceImpl implements RentService {
                 .orElseThrow(()-> new RuntimeException("rent post id not found !"));
         return RentMapper.MapToDto(single_rent_details);
     }
+
+    @Override
+    public List<RentDto> filter_all(RentDto rentDto) {
+        String location = rentDto.getLocation();
+        double price = rentDto.getPrice();
+        int floor = rentDto.getFloor();
+        int member = rentDto.getMember();
+
+        if(!location.equals("All") && price!=-1)
+        {
+            List<RentEntity> all_rent = rentRepo.findByLocationAndPriceLessThanAndFloorLessThanAndMemberLessThan(location,price,floor,member);
+            return all_rent.stream().map(RentMapper::MapToDto).collect(Collectors.toList());
+        }
+        else  if(location.equals("All") && price==-1)
+        {
+            List<RentEntity> all_rent = rentRepo.findByFloorLessThanAndMemberLessThan(floor,member);
+            return all_rent.stream().map(RentMapper::MapToDto).collect(Collectors.toList());
+        }
+        else if(!location.equals("All"))
+        {
+            List<RentEntity> all_rent = rentRepo.findByLocationAndFloorLessThanAndMemberLessThan(location,floor,member);
+            return all_rent.stream().map(RentMapper::MapToDto).collect(Collectors.toList());
+        }
+        else
+        {
+            List<RentEntity> all_rent = rentRepo.findByPriceLessThanAndFloorLessThanAndMemberLessThan(price,floor,member);
+            return all_rent.stream().map(RentMapper::MapToDto).collect(Collectors.toList());
+        }
+    }
 }

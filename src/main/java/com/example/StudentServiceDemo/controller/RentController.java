@@ -62,4 +62,10 @@ public class RentController {
         Long id = singleUploadLongDto.getId();
         return ResponseEntity.ok(rentService.get_single_rent_details(id));
     }
+
+    @PostMapping("/filter_all")
+    private ResponseEntity<List<RentDto>> filter_all(@RequestBody RentDto rentDto)
+    {
+        return ResponseEntity.ok(rentService.filter_all(rentDto));
+    }
 }
