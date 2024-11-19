@@ -13,6 +13,7 @@ public interface ProductRepo extends JpaRepository<ProductEntity,Long> {
     List<ProductEntity> findByNameLike(String name);
     List<ProductEntity> findByNameStartingWith(String name);
     List<ProductEntity> findByNameContaining(String string);
-    List<ProductEntity> findByPriceLessThan(Double price);
+    List<ProductEntity> findByPriceLessThan(double price);
     List<ProductEntity> findByCategoryAndLocation(String category,String location);
+    List<ProductEntity> findByCategoryAndPriceLessThan(String category,double price);
 }

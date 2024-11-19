@@ -2,6 +2,7 @@ package com.example.StudentServiceDemo.controller;
 
 import com.example.StudentServiceDemo.dto.FileResponseDto;
 import com.example.StudentServiceDemo.dto.ProductDto;
+import com.example.StudentServiceDemo.dto.SingleUploadLongDto;
 import com.example.StudentServiceDemo.service.ProductService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -36,10 +37,10 @@ public class ProductController {
         return ResponseEntity.ok(productService.see_all_product());
     }
 
-    @GetMapping("/filter_name/{name}")
-    private ResponseEntity<List<ProductDto>> filter_by_name(@PathVariable String name)
+    @PostMapping("/filter_name")
+    private ResponseEntity<List<ProductDto>> filter_by_name(@RequestBody ProductDto productDto)
     {
-        return ResponseEntity.ok(productService.filter_search_using_name(name));
+        return ResponseEntity.ok(productService.filter_search_using_name(productDto));
     }
 
     @GetMapping("filter_price/{price}")
@@ -74,5 +75,18 @@ public class ProductController {
         return new ResponseEntity<>(productService.upload_product(path,image,product),HttpStatus.CREATED);
 
         //return new ResponseEntity<>(fileService.upload_image(path,image), HttpStatus.OK);
+    }
+
+    @PostMapping("/find_by_id")
+    private ResponseEntity<ProductDto> find_by_id(@RequestBody SingleUploadLongDto singleUploadLongDto)
+    {
+        Long id = singleUploadLongDto.getId();
+        return ResponseEntity.ok(productService.get_single_product_details(id));
+    }
+
+    @PostMapping("/find_by_category_and_location")
+    private ResponseEntity<List<ProductDto>> find_by_category_and_location(@RequestBody ProductDto productDto)
+    {
+        return ResponseEntity.ok(productService.find_by_category_and_location(productDto));
     }
 }

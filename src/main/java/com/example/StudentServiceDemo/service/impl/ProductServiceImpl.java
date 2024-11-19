@@ -3,7 +3,9 @@ package com.example.StudentServiceDemo.service.impl;
 import com.example.StudentServiceDemo.dto.FileResponseDto;
 import com.example.StudentServiceDemo.dto.ProductDto;
 import com.example.StudentServiceDemo.entity.ProductEntity;
+import com.example.StudentServiceDemo.entity.RentEntity;
 import com.example.StudentServiceDemo.mapper.ProductMapper;
+import com.example.StudentServiceDemo.mapper.RentMapper;
 import com.example.StudentServiceDemo.repo.ProductRepo;
 import com.example.StudentServiceDemo.service.ProductService;
 import org.springframework.stereotype.Service;
@@ -41,7 +43,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> filter_search_using_name(String name) {
+    public List<ProductDto> filter_search_using_name(ProductDto productDto) {
+        String name = productDto.getName();
         List<ProductEntity> all_product = productRepo.findByNameContaining(name);
         return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
     }
@@ -83,4 +86,38 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Override
+    public ProductDto get_single_product_details(Long id) {
+        ProductEntity single_product_details = productRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("rent post id not found !"));
+        return ProductMapper.MapToDto(single_product_details);
+    }
+
+    @Override
+    public List<ProductDto> find_by_category_and_location(ProductDto productDto) {
+
+        String category = productDto.getCategory();
+        String location = productDto.getLocation();
+
+        if(!category.equals("All") && !location.equals("All"))
+        {
+            List<ProductEntity> all_product = productRepo.findByCategoryAndLocation(category,location);
+            return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
+        }
+        else if(category.equals("All") && location.equals("All"))
+        {
+            List<ProductEntity> all_product = productRepo.findAll();
+            return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
+        }
+        else if(!category.equals("All"))
+        {
+            List<ProductEntity> all_product = productRepo.findByCategory(category);
+            return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
+        }
+        else
+        {
+            List<ProductEntity> all_product = productRepo.findByLocation(location);
+            return all_product.stream().map(ProductMapper::MapToDto).collect(Collectors.toList());
+        }
+    }
 }
