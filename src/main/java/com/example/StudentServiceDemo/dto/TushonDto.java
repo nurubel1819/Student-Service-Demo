@@ -7,13 +7,18 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentDto {
+public class TushonDto {
     private Long id;
+    private String category;
+    private String institute;
+    private String version;
     private String name;
     private String phone;
-    private int cls;
+    private String department;
+    private String grp;
     private String location;
     private String gender;
-    private String department;
+    private int cls;
+    private double fee;
     private String description;
 }
