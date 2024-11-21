@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TushonEntity {
+public class TuitionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +21,7 @@ public class TushonEntity {
     private String version;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false)
     private String phone;
     private String department;
     private String grp;
