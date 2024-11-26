@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/tuition")
 public class TuitionController {
     TuitionService tuitionService;
 
@@ -23,5 +23,11 @@ public class TuitionController {
     private ResponseEntity<SingleResponseDto> upload_new_student(@RequestBody TuitionDto tuitionDto)
     {
         return new ResponseEntity<>(tuitionService.upload_new_student(tuitionDto), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/upload_new_teacher")
+    private ResponseEntity<SingleResponseDto> upload_new_teacher(@RequestBody TuitionDto tuitionDto)
+    {
+        return new ResponseEntity<>(tuitionService.upload_new_teacher(tuitionDto),HttpStatus.CREATED);
     }
 }

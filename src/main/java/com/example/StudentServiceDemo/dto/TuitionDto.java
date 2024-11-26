@@ -14,7 +14,7 @@ public class TuitionDto {
     private String version;
     private String name;
     private String phone;
-    private String department;
+    private String faculty;
     private String grp;
     private String location;
     private String gender;

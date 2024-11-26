@@ -7,13 +7,13 @@ public class TuitionMapper {
     public static TuitionEntity MapToEntity(TuitionDto dto)
     {
         return new TuitionEntity(dto.getId(), dto.getCategory(),dto.getInstitute(),dto.getVersion(),
-                dto.getName(),dto.getPhone(),dto.getDepartment(),dto.getGrp(),dto.getLocation(),
+                dto.getName(),dto.getPhone(),dto.getFaculty(),dto.getGrp(),dto.getLocation(),
                 dto.getGender(),dto.getCls(),dto.getFee(),dto.getDescription());
     }
     public static TuitionDto MapToDto(TuitionEntity entity)
     {
         return new TuitionDto(entity.getId(),entity.getCategory(),entity.getInstitute(),entity.getVersion(),
-                entity.getName(),entity.getPhone(),entity.getDepartment(),entity.getGrp(),entity.getLocation(),
+                entity.getName(),entity.getPhone(),entity.getFaculty(),entity.getGrp(),entity.getLocation(),
                 entity.getGender(),entity.getCls(),entity.getFee(),entity.getDescription());
     }
 }

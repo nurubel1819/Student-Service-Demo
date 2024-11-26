@@ -17,13 +17,12 @@ public class TuitionEntity {
     private String category;
     @Column(nullable = false)
     private String institute;
-    @Column(nullable = false)
     private String version;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String phone;
-    private String department;
+    private String faculty;
     private String grp;
     @Column(nullable = false)
     private String location;

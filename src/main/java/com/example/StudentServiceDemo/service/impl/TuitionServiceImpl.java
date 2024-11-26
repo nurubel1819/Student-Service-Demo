@@ -30,8 +30,8 @@ public class TuitionServiceImpl implements TuitionService {
     }
 
     @Override
-    public SingleResponseDto upload_new_teacher(TuitionDto tushonDto) {
-        TuitionEntity teacher = TuitionMapper.MapToEntity(tushonDto);
+    public SingleResponseDto upload_new_teacher(TuitionDto tuitionDto) {
+        TuitionEntity teacher = TuitionMapper.MapToEntity(tuitionDto);
         TuitionEntity save_teacher = tuitionRepo.save(teacher);
         if(save_teacher==null) return new SingleResponseDto("Upload Failed");
         else return new SingleResponseDto("Upload Successful");
