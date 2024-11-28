@@ -2,7 +2,9 @@ package com.example.StudentServiceDemo.service.impl;
 
 import com.example.StudentServiceDemo.dto.SingleResponseDto;
 import com.example.StudentServiceDemo.dto.TuitionDto;
+import com.example.StudentServiceDemo.entity.RentEntity;
 import com.example.StudentServiceDemo.entity.TuitionEntity;
+import com.example.StudentServiceDemo.mapper.RentMapper;
 import com.example.StudentServiceDemo.mapper.TuitionMapper;
 import com.example.StudentServiceDemo.repo.TuitionRepo;
 import com.example.StudentServiceDemo.service.TuitionService;
@@ -41,5 +43,12 @@ public class TuitionServiceImpl implements TuitionService {
     public List<TuitionDto> get_all_tuition() {
         List<TuitionEntity> all = tuitionRepo.findAll();
         return all.stream().map(TuitionMapper::MapToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public TuitionDto get_singe_tuition_details(Long id) {
+        TuitionEntity tuitionEntity = tuitionRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("Tuition post is not found"));
+        return TuitionMapper.MapToDto(tuitionEntity);
     }
 }

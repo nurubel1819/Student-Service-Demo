@@ -9,4 +9,5 @@ public interface TuitionService {
     public SingleResponseDto upload_new_student(TuitionDto tuitionDto);
     public SingleResponseDto upload_new_teacher(TuitionDto tuitionDto);
     public List<TuitionDto> get_all_tuition();
+    public TuitionDto get_singe_tuition_details(Long id);
 }

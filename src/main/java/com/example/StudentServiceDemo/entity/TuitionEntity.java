@@ -28,6 +28,7 @@ public class TuitionEntity {
     private String location;
     @Column(nullable = false)
     private String gender;
+    @Column(nullable = true)
     private int cls;
     @Column(nullable = false)
     private double fee;

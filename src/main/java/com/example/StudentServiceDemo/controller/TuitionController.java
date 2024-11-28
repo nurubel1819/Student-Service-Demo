@@ -1,14 +1,14 @@
 package com.example.StudentServiceDemo.controller;
 
 import com.example.StudentServiceDemo.dto.SingleResponseDto;
+import com.example.StudentServiceDemo.dto.SingleUploadLongDto;
 import com.example.StudentServiceDemo.dto.TuitionDto;
 import com.example.StudentServiceDemo.service.TuitionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/tuition")
@@ -29,5 +29,17 @@ public class TuitionController {
     private ResponseEntity<SingleResponseDto> upload_new_teacher(@RequestBody TuitionDto tuitionDto)
     {
         return new ResponseEntity<>(tuitionService.upload_new_teacher(tuitionDto),HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get_all_tuition")
+    private ResponseEntity<List<TuitionDto>> get_all_tuition()
+    {
+        return ResponseEntity.ok(tuitionService.get_all_tuition());
+    }
+
+    @PostMapping("/find_by_id")
+    private ResponseEntity<TuitionDto> find_by_post_id(@RequestBody SingleUploadLongDto singleUploadLongDto)
+    {
+        return ResponseEntity.ok(tuitionService.get_singe_tuition_details(singleUploadLongDto.getId()));
     }
 }
