@@ -42,4 +42,10 @@ public class TuitionController {
     {
         return ResponseEntity.ok(tuitionService.get_singe_tuition_details(singleUploadLongDto.getId()));
     }
+
+    @PostMapping("/filter_all")
+    private ResponseEntity<List<TuitionDto>> filter_all(@RequestBody TuitionDto tuitionDto)
+    {
+        return ResponseEntity.ok(tuitionService.filter_all(tuitionDto));
+    }
 }

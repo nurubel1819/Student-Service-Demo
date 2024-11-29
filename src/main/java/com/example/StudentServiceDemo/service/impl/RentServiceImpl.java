@@ -80,7 +80,7 @@ public class RentServiceImpl implements RentService {
 
         if(!location.equals("All") && price!=-1)
         {
-            List<RentEntity> all_rent = rentRepo.findByLocationAndPriceLessThanAndFloorLessThanAndMemberLessThan(location,price,floor,member);
+            List<RentEntity> all_rent = rentRepo.findByLocationAndPriceLessThanAndFloorLessThanAndMemberLessThan(location,price+1,floor,member);
             return all_rent.stream().map(RentMapper::MapToDto).collect(Collectors.toList());
         }
         else  if(location.equals("All") && price==-1)
@@ -95,7 +95,7 @@ public class RentServiceImpl implements RentService {
         }
         else
         {
-            List<RentEntity> all_rent = rentRepo.findByPriceLessThanAndFloorLessThanAndMemberLessThan(price,floor,member);
+            List<RentEntity> all_rent = rentRepo.findByPriceLessThanAndFloorLessThanAndMemberLessThan(price+1,floor,member);
             return all_rent.stream().map(RentMapper::MapToDto).collect(Collectors.toList());
         }
     }

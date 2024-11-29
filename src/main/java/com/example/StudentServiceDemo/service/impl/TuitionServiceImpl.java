@@ -51,4 +51,33 @@ public class TuitionServiceImpl implements TuitionService {
                 .orElseThrow(()-> new RuntimeException("Tuition post is not found"));
         return TuitionMapper.MapToDto(tuitionEntity);
     }
+
+    @Override
+    public List<TuitionDto> filter_all(TuitionDto tuitionDto) {
+        String category = tuitionDto.getCategory();
+        String location = tuitionDto.getLocation();
+        String gender = tuitionDto.getGender();
+        double fee = tuitionDto.getFee();
+
+        if(!location.equals("All") && fee!=-1)
+        {
+            List<TuitionEntity> all_tuition = tuitionRepo.findByLocationAndFeeLessThanAndCategoryAndGender(location,fee,category,gender);
+            return all_tuition.stream().map(TuitionMapper::MapToDto).collect(Collectors.toList());
+        }
+        else  if(location.equals("All") && fee==-1)
+        {
+            List<TuitionEntity> all_tuition = tuitionRepo.findByCategoryAndGender(category,gender);
+            return all_tuition.stream().map(TuitionMapper::MapToDto).collect(Collectors.toList());
+        }
+        else if(!location.equals("All"))
+        {
+            List<TuitionEntity> all_tuition = tuitionRepo.findByLocationAndCategoryAndGender(location,category,gender);
+            return all_tuition.stream().map(TuitionMapper::MapToDto).collect(Collectors.toList());
+        }
+        else
+        {
+            List<TuitionEntity> all_tuition = tuitionRepo.findByFeeLessThanAndCategoryAndGender(fee+1,category,gender);
+            return all_tuition.stream().map(TuitionMapper::MapToDto).collect(Collectors.toList());
+        }
+    }
 }
